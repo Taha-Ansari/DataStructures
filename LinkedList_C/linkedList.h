@@ -9,4 +9,4 @@ typedef struct node{
 node * createHeadNode();
 void printList();
 void insertToBack(node * head, int value);
-void insertToFront(node * head, int value);
+void insertToFront(node ** head, int value);

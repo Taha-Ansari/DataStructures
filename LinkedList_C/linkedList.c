@@ -16,7 +16,8 @@ int main(){
     printf("\nINSERTING 1,2,3,4,5 TO HEAD OF THE LIST\n");
 
     for(int k=5; k>0; k--){
-        insertToFront(head, k);
+        //pass in memory address of head
+        insertToFront(&head, k);
     }
     printList(head);
 
@@ -31,17 +32,14 @@ node * createHeadNode(int id){
     return newNode;
 }
 
-void insertToFront(node * head, int value){
-    node * newNode = malloc(sizeof(node));
+void insertToFront(node ** head, int value){
     //creating new node to insert to the head
+    node * newNode = malloc(sizeof(node));
     newNode->id = value;
-    newNode->next = temp;
-
-
-    newNode = head;
+    // make new node the head by having its next be the current head and assigning it as the new head
+    newNode->next = *head;
+    *head = newNode;
 }
-
-
 
 //function to insert to the back of the list 
 void insertToBack(node * head, int value){
