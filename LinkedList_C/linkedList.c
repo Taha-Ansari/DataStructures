@@ -78,3 +78,14 @@ void deleteFromFront(node**head){
 }
 
 //function to delete from index 
+void deleteFromIndex(node * head, int index){
+    node * currentNode = head;
+
+    for(int i=0; i<index-1; i++){
+        if(currentNode->next != NULL){
+            currentNode = currentNode->next;
+        }        
+    }
+    free(currentNode->next);
+    currentNode->next = currentNode->next->next;
+}

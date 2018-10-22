@@ -26,6 +26,11 @@ int main(){
     insertAtIndex(head, 3, 100);
     printList(head);
 
+    //inserting to index 3
+    printf("\nDELETING VALUE 100 FROM INDEX 3 IN THE LIST\n");
+    deleteFromIndex(head, 3);
+    printList(head);
+
     //deleting from the back of the list
     printf("\nDELETING 2 ITEMS FROM THE BACK OF THE LIST\n");
     deleteFromBack(head);

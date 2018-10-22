@@ -13,3 +13,4 @@ void insertToFront(node ** head, int value);
 void insertAtIndex(node * head, int index, int value);
 void deleteFromBack(node * head);
 void deleteFromFront(node ** head);
+void deleteFromIndex(node * head, int index);
