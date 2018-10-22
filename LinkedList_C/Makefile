@@ -4,11 +4,10 @@ CC = gcc
 # -Wall for additional compiler warnings
 FLAGS = -g -Wall
 
-all:
-	$(compile execute)
+all: compile execute
 
-compile:
-	$(CC) $(FLAGS) linkedList.c -o linkedList
+compile: linkedList.c
+	$(CC) $(FLAGS) linkedList.h linkedList.c -o linkedList
 
 execute:
 	./linkedList
