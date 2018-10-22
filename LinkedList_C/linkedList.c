@@ -1,30 +1,6 @@
 #include "linkedList.h"
 
-//example usage for linked list
-int main(){
-
-    //Creating head node to start the linked list
-    node * head = createHeadNode(6);
-    
-    //inserting to list sequentially (insert at the end)
-    printf("\nINSERTING 6,7,8,9,10 TO THE BACK OF THE LIST\n");
-
-    for(int i=7; i<11; i++){
-        insertToBack(head, i);
-    }
-    printList(head);
-    printf("\nINSERTING 1,2,3,4,5 TO HEAD OF THE LIST\n");
-
-    for(int k=5; k>0; k--){
-        //pass in memory address of head
-        insertToFront(&head, k);
-    }
-    printList(head);
-
-    return(0);
-}
-
-node * createHeadNode(int id){
+node * createNode(int id){
     node * newNode = NULL;
     newNode = malloc(sizeof(node));
     newNode->id = id;
@@ -32,10 +8,10 @@ node * createHeadNode(int id){
     return newNode;
 }
 
+//function to insert to the front of the list
 void insertToFront(node ** head, int value){
     //creating new node to insert to the head
-    node * newNode = malloc(sizeof(node));
-    newNode->id = value;
+    node * newNode = createNode(value);
     // make new node the head by having its next be the current head and assigning it as the new head
     newNode->next = *head;
     *head = newNode;
@@ -43,19 +19,34 @@ void insertToFront(node ** head, int value){
 
 //function to insert to the back of the list 
 void insertToBack(node * head, int value){
-    node * newNode = malloc(sizeof(node));
+    //creating new node to insert to the end
+    node * newNode = createNode(value);
     node * currentNode = head;
     //iterating through list until end of list found
     while(currentNode->next != NULL){
         currentNode = currentNode->next;
     }
-    //creating new node to insert to the end
-    newNode->id = value;
     newNode->next = NULL;
     //insert new node to the end of the list
     currentNode->next = newNode;    
 }
 
+//function to insert at an index
+void insertAtIndex(node * head, int index, int value){
+    
+    node * currentNode = head;
+    node * newNode = createNode(value);
+    //iterate to index - 1 
+    for(int i=0; i<index-1; i++){
+        if(currentNode->next != NULL){
+            currentNode = currentNode->next;
+        }
+    }
+    newNode->next = currentNode->next;
+    currentNode->next = newNode;
+}
+
+//function to print the list in sequential order
 void printList(node * head){
     node * list = head;   
     int counter = 0;
@@ -66,3 +57,24 @@ void printList(node * head){
         list = list->next;
     }
 }
+
+//function to delete from back of the list
+void deleteFromBack(node * head){
+    node * currentNode = head;
+    //iterate to 2nd last node so we can delete the last one
+    while(currentNode->next->next != NULL){
+        currentNode=currentNode->next;
+    }
+    //break link to last node
+    free(currentNode->next);
+    currentNode->next = NULL;
+}
+
+//function to delete from front of the list
+void deleteFromFront(node**head){
+    node * temp = (*head)->next;
+    free(*head);
+    *head = temp;
+}
+
+//function to delete from index 

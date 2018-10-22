@@ -7,10 +7,10 @@ FLAGS = -g -Wall
 all: compile execute
 
 compile: linkedList.c
-	$(CC) $(FLAGS) linkedList.h linkedList.c -o linkedList
+	$(CC) $(FLAGS) linkedList.h linkedList.c main.c -o main
 
 execute:
-	./linkedList
+	./main
 
 clean:
 	rm linkedList
